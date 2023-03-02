@@ -6,7 +6,7 @@
 #    By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 12:12:14 by meltremb          #+#    #+#              #
-#    Updated: 2023/02/27 12:28:25 by meltremb         ###   ########.fr        #
+#    Updated: 2023/03/02 10:16:39 by meltremb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,17 @@ CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 RM		=	rm -rf
 
+# Libraries
+LDIR	=	reworked-libft/
+LIBFT	=	libft.a
+
 # Dir and file names
 NAME	=	pipex
 SRCDIR	=	src/
 OBJDIR	=	bin/
-SRCS	=	src/main.cpp
+SRCS	=	src/pipex.c \
+			src/data_utils.c \
+
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
 
@@ -52,20 +58,26 @@ OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 all: $(NAME)
 
 # Generates output file
-$(NAME): $(OBJS)
-	$(HIDE)$(CC) $(CFLAGS) $(OBJS) -o $@
+$(NAME): $(OBJS) $(LDIR)/$(LIBFT)
+	$(HIDE)$(CC) $(CFLAGS) $(LDIR)/$(LIBFT) -o $@ $^
 
-# Compiles sources into objects
-.c.o: $(SRCS) $(INC)
-	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
+$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
+		$(HIDE)mkdir -p $(OBJDIR)
+		$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
+
+# Generates libft
+$(LDIR)/$(LIBFT):
+				$(HIDE)$(MAKE) -C $(LDIR)
 
 # Removes objects
 clean:
 	$(HIDE)$(RM) $(OBJS)
+	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) clean
 
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
+	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes
 re: fclean all
