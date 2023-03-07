@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 12:32:27 by meltremb          #+#    #+#             */
-/*   Updated: 2023/03/02 16:54:21 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:39:11 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 typedef	struct s_data
 {
 	int		*status;
-	int		fd[2];
+	int		fd1;
+	int		fd2;
+	int		end[2];
 	char	**paths;
 	char	**args1;
 	char	**args2;
 	char	*cmd1;
 	char	*cmd2;
-	char	*prog1;
-	char	*prog2;
-	pid_t	child1;
-	pid_t	child2;
+	pid_t	child;
+	pid_t	parent;
 }				t_data;
 
 void	data_init(t_data *d, char **argv, char **envp);

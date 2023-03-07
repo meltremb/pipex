@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:14:55 by meltremb          #+#    #+#             */
-/*   Updated: 2023/03/07 12:24:19 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:29:48 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**args(char *argv)
 
 	array = ft_split(argv, ' ');
 	if (!array[1])
-		array = NULL;
+		array[1] = NULL;
 	return (array);
 }
 
