@@ -6,7 +6,7 @@
 #    By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 12:12:14 by meltremb          #+#    #+#              #
-#    Updated: 2023/03/02 10:16:39 by meltremb         ###   ########.fr        #
+#    Updated: 2023/03/07 15:09:45 by meltremb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,9 @@ $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 # Generates libft
 $(LDIR)/$(LIBFT):
 				$(HIDE)$(MAKE) -C $(LDIR)
+
+leaks: all
+	$(HIDE) valgrind --show-leak-kinds=all --trace-children=yes --leak-check=full --track-fds=yes
 
 # Removes objects
 clean:
