@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 12:38:08 by meltremb          #+#    #+#             */
-/*   Updated: 2023/03/16 10:55:04 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:10:04 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,12 @@ int	main(int argc, char **argv, char **envp)
 	t_data	d;
 
 	if (argc != 5)
-	{
-		close(0);
-		close(1);
-		close(2);
 		ft_exit("Wrong amount of arguments");
-	}
 	arg_check(argv);
 	d.fd1 = open(argv[1], O_RDONLY);
 	d.fd2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	printf("%d %d\n", d.fd1, d.fd2);
 	if (d.fd1 < 0 || d.fd2 < 0)
 	{
-		printf("lol\n");
 		ft_close_all(&d);
 		ft_exit("No input file");
 	}
@@ -101,5 +94,5 @@ int	main(int argc, char **argv, char **envp)
 	pipex(&d, envp);
 	ft_free(&d);
 	ft_close_all(&d);
-	return (0);
+	ft_exit("");
 }
