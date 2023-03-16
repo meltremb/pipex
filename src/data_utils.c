@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:14:55 by meltremb          #+#    #+#             */
-/*   Updated: 2023/03/07 16:43:14 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:58:09 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,22 @@ void	ft_free(t_data *d)
 		ft_free_array((void ***)&(d->args2));
 }
 
+void	ft_close(t_data *d)
+{
+	if (d->fd1 != -1)
+	{
+		close(d->fd1);
+		close(d->end[0]);
+		close(d->end[1]);
+	}
+	close(d->fd2);
+}
+
 void	ft_close_all(t_data *d)
 {
-	close(d->end[0]);
-	close(d->end[1]);
-	close(d->fd2);
-	close(d->fd1);
+	ft_close(d);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 }
 
 void	arg_check(char **argv)
@@ -44,6 +54,7 @@ void	data_init(t_data *d, char **argv, char **envp)
 	int		i;
 	char	*temp;
 
+	d->status = NULL;
 	i = -1;
 	while (envp[++i])
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)

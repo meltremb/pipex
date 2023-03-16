@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 12:32:27 by meltremb          #+#    #+#             */
-/*   Updated: 2023/03/07 16:08:27 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:15:45 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	data_init(t_data *d, char **argv, char **envp);
 void	ft_free(t_data *d);
 void	arg_check(char **argv);
 void	ft_close_all(t_data *d);
+void	ft_close(t_data *d);
 
 #endif
