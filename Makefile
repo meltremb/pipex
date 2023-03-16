@@ -6,7 +6,7 @@
 #    By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 12:12:14 by meltremb          #+#    #+#              #
-#    Updated: 2023/03/07 15:09:45 by meltremb         ###   ########.fr        #
+#    Updated: 2023/03/16 11:25:17 by meltremb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 #                                 TARGETS                                      #
 #------------------------------------------------------------------------------#
 
-all: $(NAME)
+all: submodule $(NAME)
 
 # Generates output file
 $(NAME): $(OBJS) $(LDIR)/$(LIBFT)
@@ -67,10 +67,10 @@ $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 
 # Generates libft
 $(LDIR)/$(LIBFT):
-				$(HIDE)$(MAKE) -C $(LDIR)
+	$(MAKE) -C $(LDIR)
 
-leaks: all
-	$(HIDE) valgrind --show-leak-kinds=all --trace-children=yes --leak-check=full --track-fds=yes
+submodule:
+	-@ git submodule update --init
 
 # Removes objects
 clean:
