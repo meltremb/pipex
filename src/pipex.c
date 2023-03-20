@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 12:38:08 by meltremb          #+#    #+#             */
-/*   Updated: 2023/03/20 08:54:26 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/03/20 09:36:16 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ int	child_one(t_data *d, char **envp)
 		else
 			free(cmd);
 	}
-	ft_free(d);
-	if (cmd)
-		free(cmd);
-	if (execve(cmd, d->args1, envp) == -1)
-		perror("child1");
+	if (access(ft_strjoin(d->paths[i], d->cmd1), F_OK | X_OK) != 0)
+	{
+		ft_free(d);
+		ft_close_all(d);
+		ft_exit("Command argument is not a valid command");
+	}
 	return (EXIT_FAILURE);
 }
 
@@ -54,11 +55,12 @@ int	child_two(t_data *d, char **envp)
 		else
 			free(cmd);
 	}
-	ft_free(d);
-	if (cmd)
-		free(cmd);
-	if (execve(cmd, d->args2, envp) == -1)
-		perror("child2");
+	if (access(ft_strjoin(d->paths[i], d->cmd1), F_OK | X_OK) != 0)
+	{
+		ft_free(d);
+		ft_close_all(d);
+		ft_exit("Command argument is not a valid command");
+	}
 	return (EXIT_FAILURE);
 }
 
