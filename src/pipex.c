@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 12:38:08 by meltremb          #+#    #+#             */
-/*   Updated: 2023/03/16 11:10:04 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/03/20 08:54:26 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int	child_one(t_data *d, char **envp)
 		else
 			free(cmd);
 	}
-	if (execve(cmd, d->args1, envp) == -1)
-		perror("child");
 	ft_free(d);
+	if (cmd)
+		free(cmd);
+	if (execve(cmd, d->args1, envp) == -1)
+		perror("child1");
 	return (EXIT_FAILURE);
 }
 
@@ -52,9 +54,11 @@ int	child_two(t_data *d, char **envp)
 		else
 			free(cmd);
 	}
-	if (execve(cmd, d->args2, envp) == -1)
-		perror("parent");
 	ft_free(d);
+	if (cmd)
+		free(cmd);
+	if (execve(cmd, d->args2, envp) == -1)
+		perror("child2");
 	return (EXIT_FAILURE);
 }
 
